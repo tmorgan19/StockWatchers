@@ -14,14 +14,15 @@ public class Main {
 	
 	public static void main(String[] args) {
 
-		testUserHibernate();
+		// does not work after setting up controller
+//		testUserHibernate();
 		
 		
 	}
 
 	public static void testUserHibernate() {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
-		
+
 		UserService userService = ac.getBean("userService", UserService.class);
 		
 		User u1 = new User("example", "password", "John", "Smith", "jsmith@gmail.com");
