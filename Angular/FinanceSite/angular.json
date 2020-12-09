@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "FinanceSite"
+  "defaultProject": "FinanceSite",
+  "cli": {
+    "analytics": false
+  }
 }
