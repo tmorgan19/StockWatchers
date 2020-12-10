@@ -14,5 +14,5 @@ public class ViewController {
 	public String index() {
 		log.info("Getting index HTML from View Controller");
 		return null;
-}
+	}
 }
