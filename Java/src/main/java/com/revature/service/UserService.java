@@ -27,4 +27,20 @@ public class UserService {
 	public User getUserByUserame(String username) {
 		return userRepository.findByUsername(username);
 	}
+
+	public boolean attemptLogin(User user) {
+		boolean success = false;
+		String username = user.getUsername();
+		String password = user.getPassword();
+		
+		User userinDB = getUserByUserame(username);
+		if (userinDB != null) {
+			if (username.equalsIgnoreCase(userinDB.getUsername())) {
+				if (password.equals(userinDB.getPassword())) {
+					success = true;
+				}
+			}
+		}
+		return success;
+	}
 }

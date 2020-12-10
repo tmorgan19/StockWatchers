@@ -23,4 +23,13 @@ public class UserController {
 		return (userService.registerUser(user)) ? "It worked" : "It did not work";
 	}
 	
+	
+	/**
+	 * POST request to http://localhost:8080/FinanceSite/login where username and password are sent as JSON in body
+	 * will check credentials and return if valid login or not
+	 */
+	@PostMapping("/login")
+	public @ResponseBody String attemptLogin(@RequestBody User user) {
+		return (userService.attemptLogin(user)) ? "Log in successful" : "Log in unsuccessful";
+	}
 }
