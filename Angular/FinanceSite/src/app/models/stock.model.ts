@@ -1,4 +1,5 @@
 export class Stock{
     id:number;
-    ticker:string;
+    symbol:string;
+    price:number;
 }
