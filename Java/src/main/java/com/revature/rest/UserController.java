@@ -1,7 +1,11 @@
 package com.revature.rest;
 
-import static com.revature.util.ClientMessageUtil.*;
+import static com.revature.util.ClientMessageUtil.LOGIN_SUCCESSFUL;
+import static com.revature.util.ClientMessageUtil.LOGIN_UNSUCCESSFUL;
+import static com.revature.util.ClientMessageUtil.REGISTRATION_SUCCESSFUL;
+import static com.revature.util.ClientMessageUtil.REGISTRATION_UNSUCCESSFUL;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +37,18 @@ public class UserController {
 	 * will check credentials and return if valid login or not
 	 */
 	@PostMapping("/login")
-	public @ResponseBody String attemptLogin(@RequestBody User user) {
-		return (userService.attemptLogin(user)) ? "Log in successful" : "Log in unsuccessful";
+	public @ResponseBody ClientMessage attemptLogin(@RequestBody User user) {
+		return (userService.attemptLogin(user)) ? LOGIN_SUCCESSFUL : LOGIN_UNSUCCESSFUL;
+	}
+	
+	
+	@PostMapping("/getUserByName")
+	public @ResponseBody User getUserByName(@RequestBody User user) {
+		return userService.getUserByUserame(user.getUsername());
+	}
+	
+	@PostMapping("/getUsers")
+	public @ResponseBody List<User> getAllUsers() {
+		return userService.getAllUsers();
 	}
 }
