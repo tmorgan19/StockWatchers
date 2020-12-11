@@ -4,7 +4,7 @@ import { IEC_API_URL , IEC_API_KEY} from './../../environments/environment.prod'
 import { Stock } from './../models/stock.model';
 import { StockAll } from './../models/stock-all.model';
 import { Injectable } from '@angular/core';
-import {HttpClient,HttpErrorResponse} from '@angular/common/http';
+import {HttpClient,HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import{catchError,tap} from 'rxjs/operators';
 import { temporaryAllocator } from '@angular/compiler/src/render3/view/util';
@@ -15,20 +15,17 @@ import { query } from '@angular/animations';
 })
 export class StocksService {
 
-stockAllRef:Observable<StockAll[]>
-
+ httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
   constructor(private http: HttpClient, private messageService:MessageService) { }
 
   //Returns a list of the top stocks with everything but their monetary value. A user will have to search a specific stock to see that (or click on that stock)
-  public getTopStocks():Observable<StockAll[]>
+  public getTopStocks(): Observable<StockAll[]>
   {
-    if(this.stockAllRef === null)
-    {
-      this.stockAllRef =  this.http.get<StockAll[]>(`${IEC_API_URL}ref-data/symbols?token=${IEC_API_KEY}`).pipe(
-        catchError(this.handleError<StockAll[]>('getTopStocks',[]))  
-      )
-    }
-    return this.stockAllRef;
+  
+    return  this.http.get<StockAll[]>(`${IEC_API_URL}ref-data/symbols?token=${IEC_API_KEY}`).pipe(
+      catchError(this.handleError<StockAll[]>('getTopStocks',[])))  
   }
 
   //Returns a stock based on the symbol. CANNOT DO COMPANY NAME
