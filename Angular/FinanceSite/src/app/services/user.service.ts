@@ -38,6 +38,27 @@ getUserByUsername(username:String): Observable<User>
     catchError(this.handleError<User>('getUserByUsername',null))
   )
 }
+//Not implemented into UserController
+getAllUsers(): Observable<User[]>
+{
+  return  this.http.get<User[]>(`${SERVER_URL}/getUsers`).pipe(
+    catchError(this.handleError<User[]>('getUserByUsername',null))
+  )
+}
+//Not implemented into UserController
+updateUser(user:User): Observable<String>
+{
+  return this.http.post<String>(`${SERVER_URL}/update`,user).pipe(
+    catchError(this.handleError<String>('updateUser',null))
+  )
+}
+//Not implemented into UserController
+logoutUser(user:User):Observable<String>
+{
+  return this.http.post<String>(`${SERVER_URL}/logout`,user).pipe(
+    catchError(this.handleError<String>('logoutUser',null))
+  )
+}
 
 //Error handling
  private handleError<T>(operation = 'operation', result?:T)
