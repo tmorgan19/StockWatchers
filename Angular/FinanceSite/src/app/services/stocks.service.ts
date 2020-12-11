@@ -37,7 +37,7 @@ export class StocksService {
 
   
   }
-//This search function works on names NOT symbols
+  //DOES NOT WORK RIGHT NOW
   public stockSearch(pattern:string):Observable<StockAll[]>
   {
     if(!pattern.trim())
