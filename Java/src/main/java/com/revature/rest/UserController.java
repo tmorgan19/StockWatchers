@@ -1,9 +1,6 @@
 package com.revature.rest;
 
-import static com.revature.util.ClientMessageUtil.LOGIN_SUCCESSFUL;
-import static com.revature.util.ClientMessageUtil.LOGIN_UNSUCCESSFUL;
-import static com.revature.util.ClientMessageUtil.REGISTRATION_SUCCESSFUL;
-import static com.revature.util.ClientMessageUtil.REGISTRATION_UNSUCCESSFUL;
+import static com.revature.util.ClientMessageUtil.*;
 
 import java.util.List;
 
@@ -50,5 +47,10 @@ public class UserController {
 	@PostMapping("/getUsers")
 	public @ResponseBody List<User> getAllUsers() {
 		return userService.getAllUsers();
+	}
+	
+	@PostMapping("/update")
+	public @ResponseBody ClientMessage updateUserInfo(@RequestBody User user) {
+		return (userService.updateInfo(user)) ? UPDATE_SUCCESSFUL : UPDATE_UNSUCCESSFUL;
 	}
 }

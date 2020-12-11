@@ -8,4 +8,6 @@ public class ClientMessageUtil {
 	public static final ClientMessage REGISTRATION_UNSUCCESSFUL = new ClientMessage("REGISTRATION UNSUCCESSFUL");
 	public static final ClientMessage LOGIN_SUCCESSFUL = new ClientMessage("LOGIN SUCCESSFUL");
 	public static final ClientMessage LOGIN_UNSUCCESSFUL = new ClientMessage("LOGIN UNSUCCESSFUL");
+	public static final ClientMessage UPDATE_SUCCESSFUL = new ClientMessage("UPDATE SUCCESSFUL");
+	public static final ClientMessage UPDATE_UNSUCCESSFUL = new ClientMessage("UPDATE UNSUCCESSFUL");
 }

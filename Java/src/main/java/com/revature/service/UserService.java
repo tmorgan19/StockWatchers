@@ -43,4 +43,25 @@ public class UserService {
 		}
 		return success;
 	}
+
+	public boolean updateInfo(User user) {
+		boolean success = false;
+		User userinDB = getUserByUserame(user.getUsername());
+		
+		if (userinDB != null) {
+			userinDB.setFirstName(user.getFirstName());
+			userinDB.setLastName(user.getLastName());
+			userinDB.setEmail(user.getEmail());
+			userinDB.setPassword(user.getPassword());
+			// updating userid and username not included
+			userRepository.update(userinDB);
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+		
+		
+	}
 }

@@ -39,4 +39,9 @@ public class UserRepository {
 	public List<User> findAll(){
 		return sessionFactory.getCurrentSession().createCriteria(User.class).list();
 	}
+
+	public void update(User userinDB) {
+		sessionFactory.getCurrentSession().update(userinDB);
+		
+	}
 }
