@@ -7,13 +7,15 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    SearchComponent
+    SearchComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
