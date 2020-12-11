@@ -1,1 +1,7 @@
 /.metadata/
+/Java/target/
+/Java/.classpath/
+/Java/.project/
+/Java/.settings/
+/Java/logs/
+/Servers/
