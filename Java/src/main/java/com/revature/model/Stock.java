@@ -11,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="stocks")
@@ -24,6 +27,13 @@ public class Stock {
 	
 	@Column(name="stock_symbol", unique=true, nullable=false)
 	private String stockSymbol;
+	
+	//the ignore property may not be nessecary but I had problems with
+	//this in the previous project and this fixed it so I am putting them here
+	//just in case
+	@JsonIgnore
+	@OneToMany(mappedBy="stock")
+	private List<UsersStocks> purchases;
 
 	public Stock() {}
 	public Stock(int stockid, String stockSymbol) {
@@ -48,6 +58,10 @@ public class Stock {
 
 	public void setStockSymbol(String stockSymbol) {
 		this.stockSymbol = stockSymbol;
+	}
+	
+	public List<UsersStocks> getPurchases() {
+		return purchases;
 	}
 	
 	@Override
