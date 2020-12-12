@@ -40,7 +40,7 @@ public class UsersStocks {
 	private Stock stock;
 	
 	@Column(name="amount", nullable=false)
-	private double amount;
+	private double amount; //todo this should be an int
 	
 	@Column(name="price", nullable=false)
 	private double price;

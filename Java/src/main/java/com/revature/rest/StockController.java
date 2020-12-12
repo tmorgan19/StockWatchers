@@ -1,11 +1,14 @@
 package com.revature.rest;
 
+import static com.revature.util.ClientMessageUtil.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.revature.ajax.ClientMessage;
 import com.revature.model.Stock;
 import com.revature.service.StockService;
 
@@ -16,13 +19,10 @@ public class StockController {
 	private StockService stockService;
 	
 	/*
-	 * @PostMapping("/register")
-	public @ResponseBody String registerUser(@RequestBody User user) {
-		return (userService.registerUser(user)) ? "It worked" : "It did not work";
-	}
+	 * First checks if the stock posted exists in the db, if not, adds it, otherwise returns false
 	 */
 	@PostMapping("/addStock")
-	public @ResponseBody String addStock(@RequestBody Stock stock) {
-		return (stockService.addStock(stock)) ? "It worked" : "It did not work";
+	public @ResponseBody ClientMessage addStock(@RequestBody Stock stock) {
+		return (stockService.addStock(stock)) ? STOCK_SAVED : STOCK_WAS_NOT_SAVED;
 	}
 }
