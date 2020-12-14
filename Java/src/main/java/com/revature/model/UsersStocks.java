@@ -40,7 +40,7 @@ public class UsersStocks {
 	private Stock stock;
 	
 	@Column(name="amount", nullable=false)
-	private double amount; //todo this should be an int
+	private int amount;
 	
 	@Column(name="price", nullable=false)
 	private double price;
@@ -49,7 +49,7 @@ public class UsersStocks {
 	private PGTimestamp date;
 	
 	public UsersStocks() {}
-	public UsersStocks(int purchaseid, User user, Stock stock, double amount, double price, PGTimestamp date) {
+	public UsersStocks(int purchaseid, User user, Stock stock, int amount, double price, PGTimestamp date) {
 		this.purchaseid = purchaseid;
 		this.user = user;
 		this.stock = stock;
@@ -57,7 +57,7 @@ public class UsersStocks {
 		this.price = price;
 		this.date = date;
 	}
-	public UsersStocks(User user, Stock stock, double amount, double price, PGTimestamp date) {
+	public UsersStocks(User user, Stock stock, int amount, double price, PGTimestamp date) {
 		this.user = user;
 		this.stock = stock;
 		this.amount = amount;
@@ -89,7 +89,7 @@ public class UsersStocks {
 	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(double amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 	
