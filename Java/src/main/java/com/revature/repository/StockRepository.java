@@ -22,12 +22,12 @@ public class StockRepository {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public boolean save(Stock stock) {
+	public Stock save(Stock stock) {
 		try {
 			sessionFactory.getCurrentSession().save(stock);
-			return true;
+			return stock;
 		} catch (Exception e) {
-			return false;
+			return null;
 		}
 	}
 	

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.model.Stock;
 import com.revature.model.UsersStocks;
 import com.revature.repository.PurchaseRepository;
 import com.revature.repository.StockRepository;
@@ -16,13 +17,17 @@ public class PurchaseService {
 	private PurchaseRepository purchaseRepository;
 	
 	@Autowired
-	private StockRepository stocksRepository;
+	private StockService stockService;
 	
 	//add the stock to the stocks table (if it isnt there already)
 	//then add the purchase
 	public boolean addPurchase(UsersStocks purchase) {
-		stocksRepository.save(purchase.getStock());
-		return purchaseRepository.save(purchase);
+		Stock tempStock = stockService.addStock(purchase.getStock());
+		if (tempStock == null) return purchaseRepository.save(purchase);
+		else {
+			purchase.setStock(tempStock);
+			return purchaseRepository.save(purchase);
+		}
 	}
 	
 	public List<UsersStocks> getAllPurchases() {

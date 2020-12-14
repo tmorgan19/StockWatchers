@@ -12,8 +12,12 @@ public class StockService {
 	@Autowired
 	private StockRepository stockRepository;
 	
-	public boolean addStock(Stock stock) {
-		if (stockRepository.findBySymbol(stock.getStockSymbol()) == null) return stockRepository.save(stock);
-		else return false;
+	public Stock addStock(Stock stock) {
+		Stock tempStock = stockRepository.findBySymbol(stock.getStockSymbol());
+		if (tempStock == null) {
+			stockRepository.save(stock);
+			return null;
+		}
+		else return tempStock;
 	}
 }
