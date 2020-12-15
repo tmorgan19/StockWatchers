@@ -33,7 +33,7 @@ public class Stock {
 	//just in case
 	@JsonIgnore
 	@OneToMany(mappedBy="stock")
-	private List<UsersStocks> purchases;
+	private List<Purchase> purchases;
 
 	public Stock() {}
 	public Stock(int stockid, String stockSymbol) {
@@ -60,7 +60,7 @@ public class Stock {
 		this.stockSymbol = stockSymbol;
 	}
 	
-	public List<UsersStocks> getPurchases() {
+	public List<Purchase> getPurchases() {
 		return purchases;
 	}
 	

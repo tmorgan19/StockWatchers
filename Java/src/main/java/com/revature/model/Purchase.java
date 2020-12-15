@@ -15,11 +15,9 @@ import org.postgresql.util.PGTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
-//TODO: convert users_stocks to purchases
 @Entity
-@Table(name="users_stocks")
-public class UsersStocks {
+@Table(name="purchases")
+public class Purchase {
 	
 	@Id
 	@Column(name="purchaseid")
@@ -48,8 +46,8 @@ public class UsersStocks {
 	@Column(name="date", nullable=false)
 	private PGTimestamp date;
 	
-	public UsersStocks() {}
-	public UsersStocks(int purchaseid, User user, Stock stock, int amount, double price, PGTimestamp date) {
+	public Purchase() {}
+	public Purchase(int purchaseid, User user, Stock stock, int amount, double price, PGTimestamp date) {
 		this.purchaseid = purchaseid;
 		this.user = user;
 		this.stock = stock;
@@ -57,7 +55,7 @@ public class UsersStocks {
 		this.price = price;
 		this.date = date;
 	}
-	public UsersStocks(User user, Stock stock, int amount, double price, PGTimestamp date) {
+	public Purchase(User user, Stock stock, int amount, double price, PGTimestamp date) {
 		this.user = user;
 		this.stock = stock;
 		this.amount = amount;
@@ -86,7 +84,7 @@ public class UsersStocks {
 		this.stock = stock;
 	}
 
-	public double getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 	public void setAmount(int amount) {

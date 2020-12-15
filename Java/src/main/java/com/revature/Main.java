@@ -2,10 +2,15 @@ package com.revature;
 
 import org.apache.log4j.Logger;
 import org.postgresql.Driver;
+import org.postgresql.util.PGTimestamp;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.revature.dto.PurchaseDTO;
+import com.revature.model.Purchase;
+import com.revature.model.Stock;
 import com.revature.model.User;
+import com.revature.service.PurchaseService;
 import com.revature.service.UserService;
 
 public class Main {
@@ -17,7 +22,15 @@ public class Main {
 		// does not work after setting up controller
 //		testUserHibernate();
 		
-		
+		Purchase purchase = new Purchase(new User(99, "Test", "Test", "Test", "Test", "Test"), new Stock(99, "Test"), 20, 10.50, new PGTimestamp(System.currentTimeMillis()));
+		PurchaseService purchaseService = new PurchaseService();
+		PurchaseDTO purchaseDTO = purchaseService.convertToDTO(purchase);
+		Purchase purchase2 = purchaseService.convertFromDTO(purchaseDTO);
+		purchase2.setUser(purchase.getUser());
+		purchase2.setStock(purchase.getStock());
+		System.out.println("Starter form: " + purchase);
+		System.out.println("DTO form: " + purchaseDTO);
+		System.out.println("Converted back to normal form: " + purchase2);
 	}
 
 	public static void testUserHibernate() {

@@ -4,6 +4,7 @@ import static com.revature.util.ClientMessageUtil.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +14,7 @@ import com.revature.model.Stock;
 import com.revature.service.StockService;
 
 @Controller("stockController")
+@CrossOrigin(origins = "http://localhost:4200")
 public class StockController {
 
 	@Autowired
@@ -23,6 +25,6 @@ public class StockController {
 	 */
 	@PostMapping("/addStock")
 	public @ResponseBody ClientMessage addStock(@RequestBody Stock stock) {
-		return (stockService.addStock(stock)) ? STOCK_SAVED : STOCK_WAS_NOT_SAVED;
+		return (stockService.addStock(stock) == null) ? STOCK_SAVED : STOCK_WAS_NOT_SAVED;
 	}
 }

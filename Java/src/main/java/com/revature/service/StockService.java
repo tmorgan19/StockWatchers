@@ -20,4 +20,8 @@ public class StockService {
 		}
 		else return tempStock;
 	}
+	
+	public Stock getStockBySymbol(String symbol) {
+		return stockRepository.findBySymbol(symbol);
+	}
 }

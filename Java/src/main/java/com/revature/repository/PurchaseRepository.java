@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revature.model.UsersStocks;
+import com.revature.model.Purchase;
 
 @Repository("purchaseRepository")
 
@@ -21,7 +21,7 @@ public class PurchaseRepository {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public boolean save(UsersStocks purchase) {
+	public boolean save(Purchase purchase) {
 		try {
 			sessionFactory.getCurrentSession().save(purchase);
 			return true;
@@ -30,9 +30,9 @@ public class PurchaseRepository {
 		}
 	}
 	
-	public List<UsersStocks> findPurchasesByUsername(String username) {
+	public List<Purchase> findPurchasesByUsername(String username) {
 		try {
-			return sessionFactory.getCurrentSession().createCriteria(UsersStocks.class)
+			return sessionFactory.getCurrentSession().createCriteria(Purchase.class)
 			.add(Restrictions.like("user.username", username)) // this should be the PROPERTY name of the class
 			.list();
 		} catch (IndexOutOfBoundsException e) {
@@ -40,9 +40,9 @@ public class PurchaseRepository {
 		}
 	}
 	
-	public List<UsersStocks> findPurchasesBySymbol(String symbol) {
+	public List<Purchase> findPurchasesBySymbol(String symbol) {
 		try {
-			return sessionFactory.getCurrentSession().createCriteria(UsersStocks.class)
+			return sessionFactory.getCurrentSession().createCriteria(Purchase.class)
 			.add(Restrictions.like("stock.stockSymbol", symbol)) // this should be the PROPERTY name of the class
 			.list();
 		} catch (IndexOutOfBoundsException e) {
@@ -50,7 +50,7 @@ public class PurchaseRepository {
 		}
 	}
 	
-	public boolean deletePurchase(UsersStocks purchase) {
+	public boolean deletePurchase(Purchase purchase) {
 		try {
 			sessionFactory.getCurrentSession().delete(purchase);
 			return true;
@@ -59,7 +59,7 @@ public class PurchaseRepository {
 		}
 	}
 	
-	public List<UsersStocks> findAll(){
-		return sessionFactory.getCurrentSession().createCriteria(UsersStocks.class).list();
+	public List<Purchase> findAll(){
+		return sessionFactory.getCurrentSession().createCriteria(Purchase.class).list();
 	}
 }
