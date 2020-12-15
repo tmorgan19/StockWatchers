@@ -18,11 +18,8 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-<<<<<<< HEAD
   //Returns a string that either reads: "Log in successful" or "Log in unsuccessful"
-=======
   //Returns a ClientMessage indicating success or failure
->>>>>>> profileFeature
   loginUser(user: User): Observable<ClientMessage> {
     return this.http.post<ClientMessage>(`${SERVER_URL}/login`, user).pipe(
       catchError(this.handleError<ClientMessage>('loginUser', null))
@@ -50,30 +47,18 @@ export class UserService {
       catchError(this.handleError<User[]>('getUserByUsername', null))
     )
   }
-<<<<<<< HEAD
 
-=======
   
   //Returns a ClientMessage indicating success or failure
->>>>>>> profileFeature
   updateUser(user: User): Observable<ClientMessage> {
     return this.http.post<ClientMessage>(`${SERVER_URL}/update`, user).pipe(
       catchError(this.handleError<ClientMessage>('updateUser', null))
     )
   }
-<<<<<<< HEAD
   //Not implemented into UserController
   logoutUser(user: User):void {
     
     sessionStorage.clear();
-=======
-
-  //Needs to be updated -- logout will not go to backend
-  logoutUser(user: User): Observable<String> {
-    return this.http.post<String>(`${SERVER_URL}/logout`, user).pipe(
-      catchError(this.handleError<String>('logoutUser', null))
-    )
->>>>>>> profileFeature
   }
 
   //Error handling
