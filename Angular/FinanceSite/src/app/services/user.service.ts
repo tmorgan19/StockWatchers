@@ -18,41 +18,42 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  //Returns a string that either reads: "Log in successful" or "Log in unsuccessful"
-  loginUser(user: User): Observable<String> {
-    return this.http.post<String>(`${SERVER_URL}/login`, user).pipe(
-      catchError(this.handleError<String>('loginUser', null))
+  //Returns a ClientMessage indicating success or failure
+  loginUser(user: User): Observable<ClientMessage> {
+    return this.http.post<ClientMessage>(`${SERVER_URL}/login`, user).pipe(
+      catchError(this.handleError<ClientMessage>('loginUser', null))
     )
 
   }
 
-  //Returns a string that either reads: "It worked" or "It did not work"
-
-  registerUser(user: User): Observable<String> {
-    return this.http.post<String>(`${SERVER_URL}/register`, user, this.httpOptions).pipe(
-      catchError(this.handleError<String>('registerUser', null))
+  //Returns a ClientMessage indicating success or failure
+  registerUser(user: User): Observable<ClientMessage> {
+    return this.http.post<ClientMessage>(`${SERVER_URL}/register`, user, this.httpOptions).pipe(
+      catchError(this.handleError<ClientMessage>('registerUser', null))
     )
   }
 
-  //Does not currently exist on the server, however it will need to.
-  getUserByUsername(username: String): Observable<User> {
-    return this.currUser = this.http.post<User>(`${SERVER_URL}/getUserByName`, username).pipe(
+  //Returns User from backend
+  getUserByUsername(user: User): Observable<User> {
+    return this.currUser = this.http.post<User>(`${SERVER_URL}/getUserByName`, user).pipe(
       catchError(this.handleError<User>('getUserByUsername', null))
     )
   }
-  //Not implemented into UserController
+  //Returns array of Users from backend
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${SERVER_URL}/getUsers`).pipe(
       catchError(this.handleError<User[]>('getUserByUsername', null))
     )
   }
-  //Not implemented into UserController
-  updateUser(user: User): Observable<String> {
-    return this.http.post<String>(`${SERVER_URL}/update`, user).pipe(
-      catchError(this.handleError<String>('updateUser', null))
+  
+  //Returns a ClientMessage indicating success or failure
+  updateUser(user: User): Observable<ClientMessage> {
+    return this.http.post<ClientMessage>(`${SERVER_URL}/update`, user).pipe(
+      catchError(this.handleError<ClientMessage>('updateUser', null))
     )
   }
-  //Not implemented into UserController
+
+  //Needs to be updated -- logout will not go to backend
   logoutUser(user: User): Observable<String> {
     return this.http.post<String>(`${SERVER_URL}/logout`, user).pipe(
       catchError(this.handleError<String>('logoutUser', null))
