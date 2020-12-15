@@ -29,7 +29,7 @@ export class UserService {
   //Returns a string that either reads: "It worked" or "It did not work"
 
   registerUser(user: User): Observable<ClientMessage> {
-    return this.http.post<ClientMessage>(`${SERVER_URL}/register`, user, this.httpOptions).pipe(
+    return this.http.post<ClientMessage>(`${SERVER_URL}/register`, user).pipe(
       catchError(this.handleError<ClientMessage>('registerUser', null))
     )
   }
