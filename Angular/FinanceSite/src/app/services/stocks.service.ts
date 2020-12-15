@@ -1,6 +1,10 @@
+import { ClientMessage } from './../models/client-message.model';
+import { map } from 'rxjs/operators';
+import { User } from './../models/user.model';
+import { Purchase } from './../models/purchase.model';
 import { MessageService } from './message.service';
 import {  StockSearch } from './../models/stock-search.model';
-import { IEC_API_URL , IEC_API_KEY} from './../../environments/environment.prod';
+import { IEC_API_URL, IEC_API_KEY, SERVER_URL } from './../../environments/environment.prod';
 import { Stock } from './../models/stock.model';
 import { StockAll } from './../models/stock-all.model';
 import { Injectable } from '@angular/core';
@@ -9,7 +13,6 @@ import { Observable, of, throwError } from 'rxjs';
 import{catchError,tap} from 'rxjs/operators';
 import { temporaryAllocator } from '@angular/compiler/src/render3/view/util';
 import { query } from '@angular/animations';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +23,16 @@ export class StocksService {
 };
   constructor(private http: HttpClient, private messageService:MessageService) { }
 
+  stockList:StockAll[]
+
   //Returns a list of the top stocks with everything but their monetary value. A user will have to search a specific stock to see that (or click on that stock)
+  //Should be used to generate search list, as it doesn't have a api cost
   public getTopStocks(): Observable<StockAll[]>
   {
   
-    return  this.http.get<StockAll[]>(`${IEC_API_URL}ref-data/symbols?token=${IEC_API_KEY}`).pipe(
-      catchError(this.handleError<StockAll[]>('getTopStocks',[])))  
+      return this.http.get<StockAll[]>(`${IEC_API_URL}tops?token=${IEC_API_KEY}`).pipe(
+        catchError(this.handleError<StockAll[]>('getTopStocks',[]))
+        )
   }
 
   //Returns a stock based on the symbol. CANNOT DO COMPANY NAME
@@ -40,18 +47,39 @@ export class StocksService {
   //DOES NOT WORK RIGHT NOW
   public stockSearch(pattern:string):Observable<StockAll[]>
   {
-    if(!pattern.trim())
+   console.log("searching for matching stocks")
+    if(pattern ==="")
     {
-      return of([]);
+      console.log("search was null")
+
+      return this.getTopStocks();
     }
-    return this.http.get<StockAll[]>(`api/stocksList/?name=${pattern}`).pipe(
-      tap(x =>x.length ? this.log(`found stocks matching ${pattern}`) : this.log(`no stocks found matching ${pattern}`)), this.handleError<StockAll[]>('stockSearch',[])
-    )
-     
-    
-    
+    let temp = this.getTopStocks();
+    console.log(temp);
+    return temp.pipe(map(temp => temp.filter(stock => stock.symbol.startsWith(pattern.toUpperCase()))
+    ), catchError(this.handleError<any>('stockSearch',[]))
+    ) 
   }
   
+  public getUserStocks(user:User): Observable<Purchase[]>
+  {
+    return this.http.post<Purchase[]>(`${SERVER_URL}/getPurchaseByUser`,user).pipe(
+      catchError(this.handleError<Purchase[]>('getUserStocks',[])
+    ))
+  }
+
+  public saveUserStocks(user:User,stock:StockSearch):Observable<ClientMessage>
+  {
+    let p:Purchase;
+    p.stock = stock.symbol;
+    p.user = user.id;
+    p.amount = stock.iexAskPrice;
+    p.purchaseid =0;
+
+    return this.http.post<ClientMessage>(`${SERVER_URL}/newPurchase`,p).pipe(
+      catchError(this.handleError<ClientMessage>("saveUserStocks",null))
+    )
+  }
 
 
   private handleError<T>(operation = 'operation', result?:T)

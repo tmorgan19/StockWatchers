@@ -19,18 +19,18 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   //Returns a string that either reads: "Log in successful" or "Log in unsuccessful"
-  loginUser(user: User): Observable<String> {
-    return this.http.post<String>(`${SERVER_URL}/login`, user).pipe(
-      catchError(this.handleError<String>('loginUser', null))
+  loginUser(user: User): Observable<ClientMessage> {
+    return this.http.post<ClientMessage>(`${SERVER_URL}/login`, user).pipe(
+      catchError(this.handleError<ClientMessage>('loginUser', null))
     )
 
   }
 
   //Returns a string that either reads: "It worked" or "It did not work"
 
-  registerUser(user: User): Observable<String> {
-    return this.http.post<String>(`${SERVER_URL}/register`, user, this.httpOptions).pipe(
-      catchError(this.handleError<String>('registerUser', null))
+  registerUser(user: User): Observable<ClientMessage> {
+    return this.http.post<ClientMessage>(`${SERVER_URL}/register`, user, this.httpOptions).pipe(
+      catchError(this.handleError<ClientMessage>('registerUser', null))
     )
   }
 
@@ -46,17 +46,16 @@ export class UserService {
       catchError(this.handleError<User[]>('getUserByUsername', null))
     )
   }
-  //Not implemented into UserController
-  updateUser(user: User): Observable<String> {
-    return this.http.post<String>(`${SERVER_URL}/update`, user).pipe(
-      catchError(this.handleError<String>('updateUser', null))
+
+  updateUser(user: User): Observable<ClientMessage> {
+    return this.http.post<ClientMessage>(`${SERVER_URL}/update`, user).pipe(
+      catchError(this.handleError<ClientMessage>('updateUser', null))
     )
   }
   //Not implemented into UserController
-  logoutUser(user: User): Observable<String> {
-    return this.http.post<String>(`${SERVER_URL}/logout`, user).pipe(
-      catchError(this.handleError<String>('logoutUser', null))
-    )
+  logoutUser(user: User):void {
+    
+    sessionStorage.clear();
   }
 
   //Error handling
