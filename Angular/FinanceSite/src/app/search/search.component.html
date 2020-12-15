@@ -2,5 +2,5 @@
 <p>search works!</p>
 <input #searchBox id="searchBox" (input)="searchStocks(searchBox.value)">
 <ul class= "search-result" id="searchResult">
-    <li *ngFor="let s of stock$ | async | slice:0:50 "><a routerLink ="../stock/s.symbol">{{s.symbol}} --------- {{s.askPrice}}</a></li>
+    <li *ngFor="let s of stock$ | async | slice:0:50 "><a routerLink ="../stocks/{{s.symbol}}">{{s.symbol}} --------- {{s.askPrice}}</a></li>
 </ul>
