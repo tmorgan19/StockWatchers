@@ -44,7 +44,6 @@ export class StocksService {
 
   
   }
-  //DOES NOT WORK RIGHT NOW
   public stockSearch(pattern:string):Observable<StockAll[]>
   {
    console.log("searching for matching stocks")
@@ -52,13 +51,13 @@ export class StocksService {
     {
       console.log("search was null")
 
-      return this.getTopStocks();
+      return of([])
     }
     let temp = this.getTopStocks();
     console.log(temp);
     return temp.pipe(map(temp => temp.filter(stock => stock.symbol.startsWith(pattern.toUpperCase()))
     ), catchError(this.handleError<any>('stockSearch',[]))
-    ) 
+    )
   }
   
   public getUserStocks(user:User): Observable<Purchase[]>
@@ -95,5 +94,9 @@ export class StocksService {
   {
     this.messageService.add(`Stock Service: ${message}`);
   }
+
+ 
+
+
 
 }

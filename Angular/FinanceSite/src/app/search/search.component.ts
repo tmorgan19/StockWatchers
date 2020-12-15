@@ -1,9 +1,12 @@
+
+import { finalize, map, tap } from 'rxjs/operators'
 import { StockSearch } from './../models/stock-search.model';
 import { StockAll } from './../models/stock-all.model';
 import { StocksService } from './../services/stocks.service';
 import { Component, OnInit } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { SlicePipe } from '@angular/common';
 
 @Component({
   selector: 'app-search',
@@ -23,13 +26,25 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     //this.getTopStocks();
     //this.getStock();
+    
     this.stock$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term:string) => this.stockService.stockSearch(term)),
+      switchMap((term:string) => this.stockService.stockSearch(term).pipe(
+        map(data => data.sort(this.sortByName)
+      ))
+     
     )
+    )
+    
   }
-
+  sortByName(a,b) {
+    if (a.symbol < b.symbol)
+      return -1;
+    if (a.symbol > b.symbol)
+      return 1;
+    return 0;
+  }
   getTopStocks()
   {
     this.stockService.getTopStocks().subscribe(
@@ -107,4 +122,6 @@ export class SearchComponent implements OnInit {
       }
     }
   }
+
+  
 }

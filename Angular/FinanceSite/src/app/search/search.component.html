@@ -1,7 +1,6 @@
 <app-nav></app-nav>
 <p>search works!</p>
 <input #searchBox id="searchBox" (input)="searchStocks(searchBox.value)">
-<button (click)='sortListDir()'>Sort</button> 
 <ul class= "search-result" id="searchResult">
-    <li *ngFor="let s of stock$ | async">{{s.symbol}} --------- {{s.askPrice}}</li>
+    <li *ngFor="let s of stock$ | async | slice:0:50 "><a routerLink ="../stock/s.symbol">{{s.symbol}} --------- {{s.askPrice}}</a></li>
 </ul>
