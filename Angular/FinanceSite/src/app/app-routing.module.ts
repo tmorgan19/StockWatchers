@@ -1,3 +1,4 @@
+import { RegisterComponent } from './register/register.component';
 import { SearchComponent } from './search/search.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'search', component: SearchComponent},
   { path: 'home', component: HomeComponent},
+  { path: 'register', component: RegisterComponent},
   { path: '', redirectTo:'/login', pathMatch: 'full'}
 ];
 
