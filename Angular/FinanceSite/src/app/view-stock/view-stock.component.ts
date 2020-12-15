@@ -45,7 +45,7 @@ public id:string;
   {
   console.log(this.stock)
   let temp = this.stock;
-  let u:User = new User("frank","123","j","enla","enla@gmaiil.com")
+  let u:User = new User(1,"frank","123","j","enla","enla@gmaiil.com")
 u.id= 1;
     if(value >0)
     {
