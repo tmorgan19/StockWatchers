@@ -10,14 +10,14 @@
         <p>Email</p>
     </div>
     <div class="col-sm-9">
-        <form>
-            <input type="text" placeholder="username" size = 100> <br>
-            <input type="password" placeholder="password" size = 100> <br>
-            <input type="text" placeholder="First Name" size = 100> <br>
-            <input type="text" placeholder="Last Name" size = 100> <br>
-            <input type="email" placeholder="Email" size = 100> <br>
-            <input type="button" value="register" id = "submit">
-        </form>
+        <div>
+            <input [(ngModel)]="user.username" placeholder="username" size=100 required /> <br>
+            <input [(ngModel)]="user.password" placeholder="password" size=100 required /> <br>
+            <input [(ngModel)]="user.firstName" placeholder="First Name" size=100 required /> <br>
+            <input [(ngModel)]="user.lastName" placeholder="Last Name" size=100 required /> <br>
+            <input [(ngModel)]="user.email" placeholder="Email" size=100 required /> <br>
+            <input type="button" value="register" id="submit" (click)="registerUser()">
+        </div>
         <button>Return</button>
     </div>
 
