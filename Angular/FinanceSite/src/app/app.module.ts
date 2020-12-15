@@ -1,3 +1,5 @@
+import { ViewStockComponent } from './view-stock/view-stock.component';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -20,13 +22,14 @@ import { FormsModule } from '@angular/forms';
     SearchComponent,
     ProfileComponent,
     NavComponent,
-    RegisterComponent
+    RegisterComponent,
+    ViewStockComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

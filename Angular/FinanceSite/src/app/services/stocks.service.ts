@@ -38,8 +38,9 @@ export class StocksService {
   //Returns a stock based on the symbol. CANNOT DO COMPANY NAME
   public findStock(symbol:string): Observable<StockSearch>
   {
+    console.log("findingStock: " + symbol)
     return this.http.get<StockSearch>(`${IEC_API_URL}stock/${symbol}/quote?token=${IEC_API_KEY}`).pipe(
-      catchError(this.handleError<StockSearch>('findStock',null))  
+      catchError(this.handleError<StockSearch>('findStock',null)) 
     )
 
   
@@ -67,14 +68,17 @@ export class StocksService {
     ))
   }
 
-  public saveUserStocks(user:User,stock:StockSearch):Observable<ClientMessage>
+  public saveUserStocks(user:User,stock:StockSearch,amount:number):Observable<ClientMessage>
   {
-    let p:Purchase;
+    console.log("User: " +user.username)
+    console.log("Stock: " +stock.symbol)
+
+    let p:Purchase = new Purchase();
     p.stock = stock.symbol;
     p.user = user.id;
-    p.amount = stock.iexAskPrice;
+    p.amount = amount;
     p.purchaseid =0;
-
+    p.price = stock.latestPrice;
     return this.http.post<ClientMessage>(`${SERVER_URL}/newPurchase`,p).pipe(
       catchError(this.handleError<ClientMessage>("saveUserStocks",null))
     )

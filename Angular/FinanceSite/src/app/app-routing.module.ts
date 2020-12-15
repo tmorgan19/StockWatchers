@@ -1,3 +1,4 @@
+import { ViewStockComponent } from './view-stock/view-stock.component';
 import { RegisterComponent } from './register/register.component';
 import { SearchComponent } from './search/search.component';
 import { LoginComponent } from './login/login.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent},
   { path: 'home', component: HomeComponent},
   { path: 'register', component: RegisterComponent},
+  {path : 'stocks/:id', component: ViewStockComponent},
   { path: '', redirectTo:'/login', pathMatch: 'full'}
 ];
 
