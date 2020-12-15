@@ -11,7 +11,7 @@ export class RegisterComponent {
 
   constructor(private  userService: UserService){}
 
-  public user: User = new User('','','','','');
+  public user: User = new User(0,'','','','','');
 
   public registerUser(): void {
     this.userService.registerUser(this.user)
