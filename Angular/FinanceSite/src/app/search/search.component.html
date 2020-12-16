@@ -1,6 +1,21 @@
 <app-nav></app-nav>
-<p>search works!</p>
-<input #searchBox id="searchBox" (input)="searchStocks(searchBox.value)">
+<input #searchBox id="searchBox" (input)="searchStocks(searchBox.value)" placeholder="Type in stock symbol (acronym) to search">
+<!--
 <ul class= "search-result" id="searchResult">
     <li *ngFor="let s of stock$ | async | slice:0:50 "><a routerLink ="../stocks/{{s.symbol}}">{{s.symbol}} --------- {{s.askPrice}}</a></li>
 </ul>
+-->
+<table>
+    <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let s of stock$ | async | slice:0:50 ">
+            <td><a routerLink ="../stocks/{{s.symbol}}">{{s.symbol}}</a></td>
+            <td>{{s.askPrice}}</td>
+        </tr>
+    </tbody>
+</table>
