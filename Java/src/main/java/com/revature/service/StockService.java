@@ -16,7 +16,15 @@ public class StockService {
 		Stock tempStock = stockRepository.findBySymbol(stock.getStockSymbol());
 		if (tempStock == null) {
 			stockRepository.save(stock);
-			return null;
+			return stock;
+		}
+		else return tempStock;
+	}
+	public Stock addStock(String stockString) {
+		Stock tempStock = stockRepository.findBySymbol(stockString);
+		if (tempStock == null) {
+			stockRepository.save(new Stock(stockString));
+			return stockRepository.findBySymbol(stockString);
 		}
 		else return tempStock;
 	}
