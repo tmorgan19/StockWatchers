@@ -2,14 +2,15 @@ import { NumberValueAccessor } from '@angular/forms';
 
 export class StockAll{
     symbol:string;
-    name:string;
-    date:string;
-    type:string;
-    iexId:string;
-    region:string;
-    currency:string;
-    isEnabled:boolean;
-    figi:string;
-    cik:string;
-    lei:string;
+   bidSize: number;
+   bidPrice: number;
+   askSize: number;
+   askPrice: number;
+   volume: number;
+   lastSalePrice: number;
+    lastSaleSize: number;
+    lastSaleTime: number;
+    lastUpdated:number;
+    sector: string;
+    securityType: string;
 }
