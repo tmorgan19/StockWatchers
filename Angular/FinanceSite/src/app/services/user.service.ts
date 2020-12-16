@@ -27,6 +27,14 @@ export class UserService {
 
   }
 
+  isLoggedIn(): boolean {
+    if (sessionStorage.getItem('activeUsername')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   //Returns a string that either reads: "It worked" or "It did not work"
 
   registerUser(user: User): Observable<ClientMessage> {
@@ -56,8 +64,7 @@ export class UserService {
     )
   }
   //Not implemented into UserController
-  logoutUser(user: User):void {
-    
+  logoutUser():void {
     sessionStorage.clear();
   }
 
