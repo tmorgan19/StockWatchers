@@ -1,24 +1,12 @@
 #searchBox {
     background-position: 10px 10px;
     background-repeat: no-repeat;
-    width: 100%;
+    width: 50%;
+
     font-size: 16px;
     padding: 12px 20px 12px 40px;
     border: 1px solid #ddd;
     margin-bottom: 12px;
+    margin-left: 25%;
   }
 
-  table, th, td {
-    border: 1px solid black;
-  }
-
-  th{
-    text-align: center;
-  }
-
-  table{
-    width:80%;
-    margin-left: 10%;
-    margin-right: 10%;
-    text-align: center;
-  }

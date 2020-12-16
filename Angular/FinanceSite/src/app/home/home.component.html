@@ -1,5 +1,8 @@
 <app-nav></app-nav>
-
+<h1>Hello {{activeUsername}} to StockWatch</h1>
+<div *ngIf="condition">
+    <p>Stocks bought will be shown here. You can buy stock by searching stocks on search tab</p>
+</div>
 <div class="grid grid-pad">
     <a *ngFor="let purchase of purchases" class="col-1-4"
     routerLink="../stocks/{{purchase.stockString}}">

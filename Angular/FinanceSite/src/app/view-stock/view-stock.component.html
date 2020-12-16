@@ -1,22 +1,33 @@
 
 <app-nav></app-nav>
-<table class="table">
+<table class="table" style="width: 70%; margin-left: 15%;">
     <thead>
       <tr>
-        <th scope="col">Symbol</th>
+        <th scope="sm">Symbol</th>
         <th scope="col">Company Name</th>
         <th scope="col">Current Price</th>
-        <th scope= "col">Amount to Monitor</th>
-        <th scope ="col">Submit</th>
+        <th scope ="col">Amount Owned</th>
+        <th scope ="col">Total Value</th>
+        <th scope="col">Average Cost</th>
+        <th scope= "col">Amount to Buy/Sell</th>
+        <th scope ="col">Buy/Sell</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>{{stock.symbol}}</td>
         <td>{{stock.companyName}}</td>
-        <td>{{stock.latestPrice}}</td>
+        <td>{{stock.latestPrice.toFixed(2)}}</td>
+        <td>{{purchasedAmount}}</td>
+        <td>{{value}}</td>
+        <td>{{averageCost}}</td>
         <td><input type="number" min="0" step="1" #amountBox id="amount-box"></td>
-        <td><button (click)="submitPurchase(amountBox.value)">Add Stock to Monitor</button></td>
+        <td><button (click)="submitPurchase(amountBox.value)">Buy Stock</button><br><br><button (click)="submitPurchase(amountBox.value)">Sell Stock</button></td>
       </tr>   
     </tbody>
   </table>
+
+  <p style="width: 70%; margin-left: 15%; text-align: center; "><a href="https://iexcloud.io" style="color: black;">Data provided by IEX Cloud</a>
+  </p>
+
+  
