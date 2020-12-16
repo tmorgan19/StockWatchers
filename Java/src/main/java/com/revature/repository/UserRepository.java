@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.revature.model.Stock;
 import com.revature.model.User;
 
 @Repository("userRepository")
@@ -23,6 +24,15 @@ public class UserRepository {
 	
 	public void save(User user) {
 		sessionFactory.getCurrentSession().save(user);
+	}
+	
+	public User findById(int id) {
+		try {
+			return (User) sessionFactory.getCurrentSession().createCriteria(User.class)
+					.add(Restrictions.idEq(id)).list().get(0);
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 	
 	public User findByUsername(String username) {

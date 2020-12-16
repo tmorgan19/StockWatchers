@@ -28,12 +28,12 @@ public class Purchase {
 	//this in the previous project and this fixed it so I am putting them here
 	//just in case
 	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER) //this should probably be lazy loaded
 	@JoinColumn(name="userid", nullable=false)
 	private User user;
 
 	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER) //this should probably be lazy loaded
 	@JoinColumn(name="stockid", nullable=false)
 	private Stock stock;
 	

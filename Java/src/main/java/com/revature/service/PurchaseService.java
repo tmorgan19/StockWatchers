@@ -3,6 +3,7 @@ package com.revature.service;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.postgresql.util.PGTimestamp;
@@ -58,6 +59,11 @@ public class PurchaseService {
 	public PurchaseDTO convertToDTO(Purchase purchase) {
 		return new PurchaseDTO(purchase);
 	}
+	public List<PurchaseDTO> convertToDTO(List<Purchase> purchases) {
+		List<PurchaseDTO> newPurchaseList = new ArrayList<PurchaseDTO>();
+		for (int i = 0; i < purchases.size(); i++) newPurchaseList.add(new PurchaseDTO(purchases.get(i)));
+		return newPurchaseList;
+	}
 	
 	public Purchase convertFromDTO(PurchaseDTO purchaseDTO) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
@@ -71,7 +77,7 @@ public class PurchaseService {
 		PGTimestamp tempTimestamp = new PGTimestamp(parsedDate.getTime());
 		
 		return new Purchase(purchaseDTO.getPurchaseid(), 
-				userService.getUserByUserame(purchaseDTO.getUserString()), 
+				userService.getUserById(purchaseDTO.getUserId()), 
 				stockService.getStockBySymbol(purchaseDTO.getStockString()),
 				purchaseDTO.getAmount(), 
 				purchaseDTO.getPrice(), 

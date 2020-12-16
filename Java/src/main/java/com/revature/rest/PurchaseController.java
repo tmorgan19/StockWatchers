@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.revature.ajax.ClientMessage;
+import com.revature.dto.PurchaseDTO;
 import com.revature.model.Stock;
 import com.revature.model.User;
 import com.revature.model.Purchase;
@@ -28,25 +29,25 @@ public class PurchaseController {
 	
 	//Add the purchase to the database
 	@PostMapping("/newPurchase")
-	public @ResponseBody ClientMessage newPurchase(@RequestBody Purchase purchase) {
-		return (purchaseService.addPurchase(purchase)) ? PURCHASE_SUCCESSFUL : PURCHASE_UNSUCCESSFUL;
+	public @ResponseBody ClientMessage newPurchase(@RequestBody PurchaseDTO purchase) {
+		return (purchaseService.addPurchase(purchaseService.convertFromDTO(purchase))) ? PURCHASE_SUCCESSFUL : PURCHASE_UNSUCCESSFUL;
 	}
 	
 	//Get purchases from the user provided
 	@PostMapping("/getPurchaseByUser")
-	public @ResponseBody List<Purchase> getPurchasesByUser(@RequestBody User user) {
-		return purchaseService.getPurchasesByUsername(user.getUsername());
+	public @ResponseBody List<PurchaseDTO> getPurchasesByUser(@RequestBody User user) {
+		return purchaseService.convertToDTO(purchaseService.getPurchasesByUsername(user.getUsername()));
 	}
 	
 	//Get purchases of the stock provided
 	@PostMapping("/getPurchaseBySymbol")
-	public @ResponseBody List<Purchase> getPurchasesByUser(@RequestBody Stock stock) {
-		return purchaseService.getPurchasesByUsername(stock.getStockSymbol());
+	public @ResponseBody List<PurchaseDTO> getPurchasesByUser(@RequestBody Stock stock) {
+		return purchaseService.convertToDTO(purchaseService.getPurchasesByUsername(stock.getStockSymbol()));
 	}
 
 	//Get all purchases
 	@GetMapping("/getAllPurchases")
-	public @ResponseBody List<Purchase> findAllUsersStockses() {
-		return purchaseService.getAllPurchases();
+	public @ResponseBody List<PurchaseDTO> findAllUsersStockses() {
+		return purchaseService.convertToDTO(purchaseService.getAllPurchases());
 	}
 }

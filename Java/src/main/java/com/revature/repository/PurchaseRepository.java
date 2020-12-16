@@ -33,7 +33,8 @@ public class PurchaseRepository {
 	public List<Purchase> findPurchasesByUsername(String username) {
 		try {
 			return sessionFactory.getCurrentSession().createCriteria(Purchase.class)
-			.add(Restrictions.like("user.username", username)) // this should be the PROPERTY name of the class
+			.createAlias("user", "u")
+			.add(Restrictions.like("u.username", username)) // this should be the PROPERTY name of the class
 			.list();
 		} catch (IndexOutOfBoundsException e) {
 			return null;
@@ -43,7 +44,8 @@ public class PurchaseRepository {
 	public List<Purchase> findPurchasesBySymbol(String symbol) {
 		try {
 			return sessionFactory.getCurrentSession().createCriteria(Purchase.class)
-			.add(Restrictions.like("stock.stockSymbol", symbol)) // this should be the PROPERTY name of the class
+			.createAlias("stock", "s")
+			.add(Restrictions.like("s.stockSymbol", symbol)) // this should be the PROPERTY name of the class
 			.list();
 		} catch (IndexOutOfBoundsException e) {
 			return null;
