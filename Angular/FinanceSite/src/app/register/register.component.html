@@ -1,25 +1,42 @@
-<div id="label">
-    <h3>Registeration</h3>
-</div>
-<div id="form">
-    <div class="col-sm-2">
-        <p>Username</p>
-        <p>Password</p>
-        <p>First Name</p>
-        <p>Last Name</p>
-        <p>Email</p>
-    </div>
-    <div class="col-sm-9">
-        <div>
-            <input [(ngModel)]="user.username" placeholder="username" size=100 required /> <br>
-            <input [(ngModel)]="user.password" type="password" placeholder="password" size=100 required /> <br>
-            <input [(ngModel)]="user.firstName" placeholder="First Name" size=100 required /> <br>
-            <input [(ngModel)]="user.lastName" placeholder="Last Name" size=100 required /> <br>
-            <input [(ngModel)]="user.email" placeholder="Email" size=100 required /> <br>
-            <button type="button" id="submit" (click)="registerUser()">Register</button>
+<h3 class="text-center">Registration</h3>
+<div class="container">
+    <div class="container" style="width: 25%; padding-top: 25px">
+        <div class="form-group row">
+            <label for="inputusername" class="col-md-6 col-form-label">Username</label>
+            <div class="col-md-6">
+                <input id="inputusername" class="form-control" [(ngModel)]="user.username" />
+            </div>
         </div>
-        <div *ngIf="clientMessage" class="text-center">{{clientMessage.message}}</div>
-        <button routerLink="/login">Return to Login</button>
+        <div class="form-group row">
+            <label for="inputpassword" class="col-md-6 col-form-label">Password</label>
+            <div class="col-md-6">
+                <input type="password" id="inputpassword" class="form-control" [(ngModel)]="user.password" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputfirstname" class="col-md-6 col-form-label">First Name</label>
+            <div class="col-md-6">
+                <input id="inputfirstname" class="form-control" [(ngModel)]="user.firstName" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputlastname" class="col-md-6 col-form-label">Last Name</label>
+            <div class="col-md-6">
+                <input id="inputlastname" class="form-control" [(ngModel)]="user.lastName" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputemail" class="col-md-6 col-form-label">Email</label>
+            <div class="col-md-6">
+                <input id="inputemail" class="form-control" [(ngModel)]="user.email" />
+            </div>
+        </div>
     </div>
-
+    <div class="container text-center" style="width: 25%; padding-top: 25px">
+        <button type="button" style="margin:auto; width: 50%" (click)="registerUser()">Register</button>
+    </div>
+    <div *ngIf="clientMessage" class="text-center">{{clientMessage.message}}</div>
+    <div class="container text-center" style="width: 25%; padding-top: 25px">
+        <button type="button" style="margin:auto; width: 50%" routerLink="/login">Return to Login</button>
+    </div>
 </div>
