@@ -16,7 +16,8 @@ export class HomeComponent implements OnInit {
   purchases: Purchase[];
   purchases04: Purchase[];
   //testing
-  public user: User = new User(2,'jsmith','bananas','John','Smithson','jsmith@gmail.com')
+  public activeUsername: string = sessionStorage.getItem('activeUsername')
+  public user: User = new User(0,this.activeUsername,'','','','')
 
   ngOnInit(): void {
     this.getUserStocks();
