@@ -46,7 +46,7 @@ public class Main {
 		
 		System.out.println("Find all: " + userService.getAllUsers());
 		
-		System.out.println("Find one: " + userService.getUserByUserame("example"));
+		//System.out.println("Find one: " + userService.getUserByUserame("example"));
 	}
 
 }

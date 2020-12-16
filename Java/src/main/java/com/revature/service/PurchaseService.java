@@ -78,7 +78,7 @@ public class PurchaseService {
 		
 		return new Purchase(purchaseDTO.getPurchaseid(), 
 				userService.getUserByUsername(purchaseDTO.getUserString()), 
-				stockService.getStockBySymbol(purchaseDTO.getStockString()),
+				stockService.addStock(purchaseDTO.getStockString()),
 				purchaseDTO.getAmount(), 
 				purchaseDTO.getPrice(), 
 				tempTimestamp);
