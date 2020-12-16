@@ -38,6 +38,7 @@ export class SearchComponent implements OnInit {
     )
     
   }
+  
   sortByName(a,b) {
     if (a.symbol < b.symbol)
       return -1;
