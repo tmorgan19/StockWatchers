@@ -28,7 +28,7 @@ public class UserService {
 		return userRepository.findById(id);
 	}
 	
-	public User getUserByUserame(String username) {
+	public User getUserByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
 
@@ -37,7 +37,7 @@ public class UserService {
 		String username = user.getUsername();
 		String password = user.getPassword();
 		
-		User userinDB = getUserByUserame(username);
+		User userinDB = getUserByUsername(username);
 		if (userinDB != null) {
 			if (username.equalsIgnoreCase(userinDB.getUsername())) {
 				if (password.equals(userinDB.getPassword())) {
@@ -49,8 +49,8 @@ public class UserService {
 	}
 
 	public boolean updateInfo(User user) {
-		boolean success = false;
-		User userinDB = getUserByUserame(user.getUsername());
+		//boolean success = false; //DBG *Patrick* - I commented this out because it doesn't seem to do anything
+		User userinDB = getUserByUsername(user.getUsername());
 		
 		if (userinDB != null) {
 			userinDB.setFirstName(user.getFirstName());

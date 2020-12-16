@@ -77,7 +77,7 @@ public class PurchaseService {
 		PGTimestamp tempTimestamp = new PGTimestamp(parsedDate.getTime());
 		
 		return new Purchase(purchaseDTO.getPurchaseid(), 
-				userService.getUserById(purchaseDTO.getUserId()), 
+				userService.getUserByUsername(purchaseDTO.getUserString()), 
 				stockService.getStockBySymbol(purchaseDTO.getStockString()),
 				purchaseDTO.getAmount(), 
 				purchaseDTO.getPrice(), 

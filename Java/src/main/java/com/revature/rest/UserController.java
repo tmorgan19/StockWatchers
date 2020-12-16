@@ -44,7 +44,7 @@ public class UserController {
 	
 	@PostMapping("/getUserByName")
 	public @ResponseBody User getUserByName(@RequestBody User user) {
-		return userService.getUserByUserame(user.getUsername());
+		return userService.getUserByUsername(user.getUsername());
 	}
 	
 	@GetMapping("/getUsers")

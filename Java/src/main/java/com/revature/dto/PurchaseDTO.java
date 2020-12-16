@@ -6,34 +6,34 @@ public class PurchaseDTO {
 	
 	private int purchaseid;
 	
-	private int userId;
+	private String userString; //username
 
-	private String stockString;
+	private String stockString; //stockSymbol
 	
 	private int amount;
 	
 	private double price;
 	
-	private String dateString;
+	private String dateString; //timestamp represented as string
 	
 	public PurchaseDTO() {}
-	public PurchaseDTO(int purchaseid, int userId, String stockString, int amount, double price, String dateString) {
+	public PurchaseDTO(int purchaseid, String userString, String stockString, int amount, double price, String dateString) {
 		this.purchaseid = purchaseid;
-		this.userId = userId;
+		this.userString = userString;
 		this.stockString = stockString;
 		this.amount = amount;
 		this.price = price;
 		this.dateString = dateString;
 	}
-	public PurchaseDTO(int userId, String stockString, int amount, double price, String dateString) {
-		this.userId = userId;
+	public PurchaseDTO(String userString, String stockString, int amount, double price, String dateString) {
+		this.userString = userString;
 		this.stockString = stockString;
 		this.amount = amount;
 		this.price = price;
 		this.dateString = dateString;
 	}
 	public PurchaseDTO(Purchase purchase) {
-		this(purchase.getPurchaseid(), purchase.getUser().getId(), 
+		this(purchase.getPurchaseid(), purchase.getUser().getUsername(), 
 				purchase.getStock().getStockSymbol(), purchase.getAmount(), 
 				purchase.getPrice(), purchase.getDate().toString());
 	}
@@ -45,11 +45,11 @@ public class PurchaseDTO {
 		this.purchaseid = purchaseid;
 	}
 
-	public int getUserId() {
-		return userId;
+	public String getUserString() {
+		return userString;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserString(String userString) {
+		this.userString = userString;
 	}
 
 	public String getStockString() {
@@ -82,7 +82,7 @@ public class PurchaseDTO {
 	
 	@Override
 	public String toString() {
-		return "PurchaseDTO [purchaseid=" + purchaseid + ", userId=" + userId + ", stockString=" + stockString
+		return "PurchaseDTO [purchaseid=" + purchaseid + ", userString=" + userString + ", stockString=" + stockString
 				+ ", amount=" + amount + ", price=" + price + ", dateString=" + dateString + "]";
 	}
 }
