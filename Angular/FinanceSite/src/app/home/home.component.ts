@@ -14,18 +14,27 @@ export class HomeComponent implements OnInit {
   constructor(private stocksService:StocksService) { }
 
   purchases: Purchase[];
-  //testing
+  condition: boolean;
+
   public activeUsername: string = sessionStorage.getItem('activeUsername')
   public user: User = new User(0,this.activeUsername,'','','','')
 
   ngOnInit(): void {
     this.getUserStocks();
-    
+    this.checkCondition(this.purchases);
   }
 
   getUserStocks(): void {
     this.stocksService.getUserStocks(this.user)
     .subscribe(purchases => this.purchases = purchases);
+  }
+
+  checkCondition(purchases){
+    if(purchases==[]){
+      this.condition == true;
+    }else{
+      this.condition == false;
+    }
   }
 
 }
