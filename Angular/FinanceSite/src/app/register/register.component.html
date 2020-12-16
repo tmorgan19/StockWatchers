@@ -12,13 +12,14 @@
     <div class="col-sm-9">
         <div>
             <input [(ngModel)]="user.username" placeholder="username" size=100 required /> <br>
-            <input [(ngModel)]="user.password" placeholder="password" size=100 required /> <br>
+            <input [(ngModel)]="user.password" type="password" placeholder="password" size=100 required /> <br>
             <input [(ngModel)]="user.firstName" placeholder="First Name" size=100 required /> <br>
             <input [(ngModel)]="user.lastName" placeholder="Last Name" size=100 required /> <br>
             <input [(ngModel)]="user.email" placeholder="Email" size=100 required /> <br>
             <button type="button" id="submit" (click)="registerUser()">Register</button>
         </div>
-        <button>Return</button>
+        <div *ngIf="clientMessage" class="text-center">{{clientMessage.message}}</div>
+        <button routerLink="/login">Return to Login</button>
     </div>
 
 </div>

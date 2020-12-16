@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   public userInfo: User = new User(0,'','','','','')
 
   // Message to user
-  public clientMessage: ClientMessage = new ClientMessage('')
+  public clientMessage: ClientMessage;
 
   constructor(private userService: UserService) { }
 
