@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public clientMessage: ClientMessage = new ClientMessage('');
+  public clientMessage: ClientMessage;
 
   public user: User = new User(0,'','','','','');
 
@@ -26,8 +26,11 @@ export class LoginComponent implements OnInit {
       data => {
         if(data.message=="LOGIN SUCCESSFUL"){
           this.router.navigateByUrl('/home');
+          let activeUser = this.userService.getUserByUsername(this.user);
+          sessionStorage.setItem('activeUsername', this.user.username);
         }else{
           this.router.navigateByUrl('/login');
+          this.clientMessage = new ClientMessage(data.message)
         }
       }
       

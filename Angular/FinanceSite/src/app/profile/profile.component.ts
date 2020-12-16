@@ -13,7 +13,9 @@ export class ProfileComponent implements OnInit {
 
   // depending on how currentUser is stored in session/local storage, this can be changed to that
   // below line for testing
-  public currentUser: User = new User(0,'jsmith','','','','')
+  
+  public activeUsername: string = sessionStorage.getItem('activeUsername')
+  public currentUser: User = new User(0,this.activeUsername,'','','','')
 
   // store data pulled from backend in this
   public userInfo: User = new User(0,'','','','','')

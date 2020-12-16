@@ -56,8 +56,7 @@ export class UserService {
     )
   }
   //Not implemented into UserController
-  logoutUser(user: User):void {
-    
+  logoutUser():void {
     sessionStorage.clear();
   }
 
