@@ -1,5 +1,5 @@
 <app-nav></app-nav>
-
+<h1>Hello {{activeUsername}} to StockWatch</h1>
 <div class="grid grid-pad">
     <a *ngFor="let purchase of purchases" class="col-1-4"
     routerLink="../stocks/{{purchase.stockString}}">
