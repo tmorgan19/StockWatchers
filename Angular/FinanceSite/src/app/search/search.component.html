@@ -5,11 +5,11 @@
     <li *ngFor="let s of stock$ | async | slice:0:50 "><a routerLink ="../stocks/{{s.symbol}}">{{s.symbol}} --------- {{s.askPrice}}</a></li>
 </ul>
 -->
-<table>
+<table class="table table-hover" style="width: 70%; margin-left: 15%;">
     <thead>
         <tr>
-            <th>Symbol</th>
-            <th>Price</th>
+            <th scope="col">Symbol</th>
+            <th scope="col">Price</th>
         </tr>
     </thead>
     <tbody>
@@ -19,3 +19,4 @@
         </tr>
     </tbody>
 </table>
+<p style="width: 70%; margin-left: 15%; text-align: center;"><a href="https://iexcloud.io" style="color: black;">Data provided by IEX Cloud</a>

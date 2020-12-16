@@ -87,6 +87,22 @@ export class StocksService {
     )
   }
 
+  public sellUserStocks(user:User,stock:StockSearch,amount:number):Observable<ClientMessage>
+  {
+    console.log("User: " +user.username)
+    console.log("Stock: " +stock.symbol)
+
+    let p:Purchase = new Purchase();
+    p.stockString = stock.symbol;
+    p.userString = user.username
+    p.amount = amount;
+    p.purchaseid =0;
+    p.price = stock.latestPrice;
+    p.dateString = "2020-10-02 02:02:02.000"
+    return this.http.post<ClientMessage>(`${SERVER_URL}/removeStockBySymbolByUser`,p).pipe(
+      catchError(this.handleError<ClientMessage>("saveUserStocks",null))
+    )
+  }
 
   private handleError<T>(operation = 'operation', result?:T)
   {
