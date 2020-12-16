@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   getUserStocks(): void {
     this.stocksService.getUserStocks(this.user)
-    .subscribe(purchases => this.purchases = purchases.slice(0, 4));
+    .subscribe(purchases => this.purchases = purchases);
   }
 
 }
