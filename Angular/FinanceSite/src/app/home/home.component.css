@@ -29,6 +29,7 @@
     width: 25%;
   }
   .module {
+    margin:10px;
     padding: 20px;
     text-align: center;
     color: #eee;
