@@ -15,7 +15,7 @@
     <tbody>
         <tr *ngFor="let s of stock$ | async | slice:0:50 ">
             <td><a routerLink ="../stocks/{{s.symbol}}">{{s.symbol}}</a></td>
-            <td>{{s.askPrice}}</td>
+            <td>{{s.lastSalePrice}}</td>
         </tr>
     </tbody>
 </table>
