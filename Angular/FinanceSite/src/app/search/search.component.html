@@ -13,8 +13,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let s of stock$ | async | slice:0:50 ">
-            <td><a routerLink ="../stocks/{{s.symbol}}">{{s.symbol}}</a></td>
+        <tr *ngFor="let s of stock$ | async | slice:0:50 " class="clickable-row" data-routerLink="../stocks/{{s.symbol}}">
+            <td>{{s.symbol}}</td>
             <td>{{s.lastSalePrice}}</td>
         </tr>
     </tbody>
