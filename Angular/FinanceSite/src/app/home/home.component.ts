@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
   constructor(private stocksService:StocksService) { }
 
   purchases: Purchase[];
-  purchases04: Purchase[];
   //testing
   public activeUsername: string = sessionStorage.getItem('activeUsername')
   public user: User = new User(0,this.activeUsername,'','','','')
@@ -25,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   getUserStocks(): void {
     this.stocksService.getUserStocks(this.user)
-    .subscribe(purchases => this.purchases04 = purchases.slice(0, 4));
+    .subscribe(purchases => this.purchases = purchases.slice(0, 4));
   }
 
 }
