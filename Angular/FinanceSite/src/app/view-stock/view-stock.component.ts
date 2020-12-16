@@ -1,3 +1,4 @@
+import { ClientMessage } from './../models/client-message.model';
 import { User } from './../models/user.model';
 import { NavComponent } from './../nav/nav.component';
 import { Observable } from 'rxjs';
@@ -18,6 +19,7 @@ constructor(private userService:UserService, private stockService:StocksService,
 
 public id:string;
   stock: StockSearch
+  message:ClientMessage
   ngOnInit(): void {
     this.id =this.route.snapshot.paramMap.get('id')
    this.stockService.findStock(this.id).subscribe(
@@ -45,11 +47,18 @@ public id:string;
   {
   console.log(this.stock)
   let temp = this.stock;
-  let u:User = new User(1,"frank","123","j","enla","enla@gmaiil.com")
+  let u:User = new User(1,sessionStorage.getItem("activeUsername"),"123","j","enla","enla@gmaiil.com")
 u.id= 1;
     if(value >0)
     {
-      this.stockService.saveUserStocks(u,temp,value);
+      
+      this.stockService.saveUserStocks(u,temp,value).subscribe(
+        data => {
+          this.message=data;
+          console.log(this.message)
+
+        }
+      );
     }
   }
 

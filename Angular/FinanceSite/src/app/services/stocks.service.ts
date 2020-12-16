@@ -74,11 +74,12 @@ export class StocksService {
     console.log("Stock: " +stock.symbol)
 
     let p:Purchase = new Purchase();
-    p.stock = stock.symbol;
-    p.user = user.id;
+    p.stockString = stock.symbol;
+    p.userString = user.username
     p.amount = amount;
     p.purchaseid =0;
     p.price = stock.latestPrice;
+    p.dateString = "2020-10-02 02:02:02.000"
     return this.http.post<ClientMessage>(`${SERVER_URL}/newPurchase`,p).pipe(
       catchError(this.handleError<ClientMessage>("saveUserStocks",null))
     )

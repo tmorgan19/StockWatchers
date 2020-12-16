@@ -1,9 +1,9 @@
 export class Purchase
 {
     purchaseid:number;
-    user:number;
-    stock:string;
+    userString:string;
+    stockString:string;
     amount:number;
     price:number;
-    date:string;
+    dateString:string;
 }
