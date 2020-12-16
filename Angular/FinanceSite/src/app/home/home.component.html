@@ -2,9 +2,11 @@
 
 <div class="grid grid-pad">
     <a *ngFor="let purchase of purchases04" class="col-1-4"
-    routerLink="/stocks/{{purchase.purchaseid}}">
+    routerLink="#">
         <div class="module purchase">
-            <h4>{{purchase.stock}}</h4>
+            <h4>{{purchase.stockString}}</h4>
+            <h4>Amount: {{purchase.amount}}</h4>
+            <h4>Bought Price: {{purchase.price}}</h4>
         </div>
     </a>
 </div>
