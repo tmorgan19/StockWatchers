@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
 
   purchases: Purchase[];
   purchases04: Purchase[];
-  user: User;
+  //testing
+  public user: User = new User(0,'jsmith','bananas','John','Smithson','jsmith@gmail.com')
 
   ngOnInit(): void {
     this.getUserStocks();
