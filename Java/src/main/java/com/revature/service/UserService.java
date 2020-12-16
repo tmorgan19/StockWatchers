@@ -15,9 +15,17 @@ public class UserService {
 	private UserRepository userRepository;
 	
 	public boolean registerUser(User user) {
-		userRepository.save(user);
-		//change this line later
-		return user.getId() !=0;
+		if (user.getUsername() == null || user.getPassword() == null) {
+			return false;
+		}
+		else {
+			if (userRepository.findByUsername(user.getUsername()) != null) {
+				return false;
+			} else {
+				userRepository.save(user);
+				return true;
+			}
+		}
 	}
 	
 	public List<User> getAllUsers() {
