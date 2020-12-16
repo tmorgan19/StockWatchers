@@ -68,6 +68,8 @@ export class StocksService {
     ))
   }
 
+ 
+
   public saveUserStocks(user:User,stock:StockSearch,amount:number):Observable<ClientMessage>
   {
     console.log("User: " +user.username)

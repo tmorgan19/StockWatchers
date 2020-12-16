@@ -1,12 +1,14 @@
+import { Purchase } from './../models/purchase.model';
 import { ClientMessage } from './../models/client-message.model';
 import { User } from './../models/user.model';
 import { NavComponent } from './../nav/nav.component';
-import { Observable } from 'rxjs';
+import { Observable, VirtualTimeScheduler } from 'rxjs';
 import { StockSearch } from './../models/stock-search.model';
 import { StocksService } from './../services/stocks.service';
 import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-stock',
@@ -19,19 +21,12 @@ constructor(private userService:UserService, private stockService:StocksService,
 
 public id:string;
   stock: StockSearch
+  purchasedAmount =0;
+  value:string = '0';
   message:ClientMessage
+  averageCost:string ="0"
   ngOnInit(): void {
-    this.id =this.route.snapshot.paramMap.get('id')
-   this.stockService.findStock(this.id).subscribe(
-     data => {
-       if(data)
-       {
-        console.log("data found")
-       }
-       console.log(data);
-       this.stock=data;
-     }
-   )
+  this.getStock()
     
   }
 
@@ -39,7 +34,38 @@ public id:string;
   {
     this.id =this.route.snapshot.paramMap.get('id')
     this.stockService.findStock(this.id).subscribe(
-      data => this.stock
+      data => {        
+        this.stock =data
+        let u:User = new User(1,sessionStorage.getItem("activeUsername"),"123","j","enla","enla@gmaiil.com")
+        
+        let q:Purchase[]
+        let t:number = 0;
+        let avg:number =0;
+
+         this.stockService.getUserStocks(u).subscribe(
+          data => {
+            q=data,
+            q.forEach(element => {
+              if(element.stockString === this.stock.symbol)
+              {
+                this.purchasedAmount += element.amount
+                avg += element.price
+                t+=1
+              }
+
+            });
+            //Total value of stock
+            this.value = (this.purchasedAmount * this.stock.latestPrice).toFixed(2)
+           console.log(avg)
+           console.log(t)
+           //Average cost of each stock
+            this.averageCost = (avg/t).toFixed(2)
+          }
+        )
+      
+       
+        
+       }  
     )
   }
 
