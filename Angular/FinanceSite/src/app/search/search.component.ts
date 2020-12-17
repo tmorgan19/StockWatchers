@@ -21,6 +21,7 @@ export class SearchComponent implements OnInit {
   stock$: Observable<StockAll[]>;
   currStock:StockSearch
   searchPattern:string;
+  searchValue:string = "";
 
   private searchTerms = new Subject<string>();
   ngOnInit(): void {
@@ -124,5 +125,8 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  
+  advancedSearch(symbol:string)
+  {
+    
+  }
 }

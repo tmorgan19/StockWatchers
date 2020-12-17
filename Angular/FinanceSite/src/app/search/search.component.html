@@ -17,6 +17,11 @@
             <td>{{s.symbol}}</td>
             <td>{{s.lastSalePrice}}</td>
         </tr>
+        <tr>
+            <td>Can't find what you're looking for? Try our advanced search:</td>
+            <td><input type="text"#advancedBox (input)="searchValue = advancedBox.value"><a routerLink="../stocks/{{searchValue}}"><button>Search</button></a> </td>
+
+        </tr>
     </tbody>
 </table>
 <p style="width: 70%; margin-left: 15%; text-align: center;"><a href="https://iexcloud.io" style="color: black;">Data provided by IEX Cloud</a>
