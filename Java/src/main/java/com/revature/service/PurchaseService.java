@@ -1,11 +1,11 @@
 package com.revature.service;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.postgresql.util.PGTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +16,12 @@ import com.revature.dto.PurchaseDTO;
 import com.revature.model.Purchase;
 import com.revature.repository.PurchaseRepository;
 import com.revature.repository.StockRepository;
+import com.revature.repository.UserRepository;
 
 @Service("purchaseService")
 public class PurchaseService {
+	
+	private static Logger log = Logger.getLogger(PurchaseService.class);
 	
 	@Autowired
 	private PurchaseRepository purchaseRepository;
@@ -82,5 +85,39 @@ public class PurchaseService {
 				purchaseDTO.getAmount(), 
 				purchaseDTO.getPrice(), 
 				tempTimestamp);
+	}
+
+	public boolean removeStockBySymbolByUser(PurchaseDTO purchase) {
+		Purchase purchaseObj = convertFromDTO(purchase);
+		
+		// 1. take purchase and determine User, Stock, Amount
+		int removalAmount = purchaseObj.getAmount();
+		User removalUser = purchaseObj.getUser();
+		Stock removalStock = purchaseObj.getStock();
+		
+		// 2. select purchases by user by stock and determine if the user can remove the amount (it wont result in a negative amount)
+		List<Purchase> purchaseList = purchaseRepository.findPurchasesByUsernameBySymbol(removalUser.getUsername(), 
+				removalStock.getStockSymbol());
+		
+		int sum = 0;
+		for (int i = 0; i < purchaseList.size(); i++) sum += purchaseList.get(i).getAmount();
+		if (removalAmount > sum) return false;
+		
+		// 3. step through purchases and remove each one until the given amount is removed 
+		for (int i = 0; i < purchaseList.size(); i++) {			
+			// if the amount in the purchase is less than the removalAmount, delete the purchase
+			if (purchaseList.get(i).getAmount() <= removalAmount) {
+				removalAmount -= purchaseList.get(i).getAmount();
+				purchaseRepository.deletePurchase(purchaseList.get(i));
+			} else { // if the amount remaining is greater than the removalAmount
+				purchaseList.get(i).setAmount(purchaseList.get(i).getAmount()-removalAmount);
+				purchaseRepository.updatePurchase(purchaseList.get(i));
+				break;
+			}
+			
+			if (removalAmount == 0) break;
+		}
+		
+		return true;
 	}
 }

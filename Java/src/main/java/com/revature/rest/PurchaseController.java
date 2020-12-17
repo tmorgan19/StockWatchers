@@ -44,6 +44,11 @@ public class PurchaseController {
 	public @ResponseBody List<PurchaseDTO> getPurchasesByUser(@RequestBody Stock stock) {
 		return purchaseService.convertToDTO(purchaseService.getPurchasesByUsername(stock.getStockSymbol()));
 	}
+	
+	@PostMapping("/removeStockBySymbolByUser")
+	public @ResponseBody ClientMessage removeStockBySymbolByUser(@RequestBody PurchaseDTO purchase) {
+		return (purchaseService.removeStockBySymbolByUser(purchase)) ? PURCHASE_REMOVAL_SUCCESSFUL : PURCHASE_REMOVAL_UNSUCCESSFUL;
+	}
 
 	//Get all purchases
 	@GetMapping("/getAllPurchases")

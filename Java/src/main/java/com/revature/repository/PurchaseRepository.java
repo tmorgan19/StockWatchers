@@ -36,7 +36,7 @@ public class PurchaseRepository {
 			.createAlias("user", "u")
 			.add(Restrictions.like("u.username", username)) // this should be the PROPERTY name of the class
 			.list();
-		} catch (IndexOutOfBoundsException e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -47,21 +47,61 @@ public class PurchaseRepository {
 			.createAlias("stock", "s")
 			.add(Restrictions.like("s.stockSymbol", symbol)) // this should be the PROPERTY name of the class
 			.list();
-		} catch (IndexOutOfBoundsException e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
 	
-	public boolean deletePurchase(Purchase purchase) {
+	public List<Purchase> findPurchasesByUsernameBySymbol(String username, String symbol) {
 		try {
-			sessionFactory.getCurrentSession().delete(purchase);
+			return sessionFactory.getCurrentSession().createCriteria(Purchase.class)
+			.createAlias("user", "u").createAlias("stock", "s")
+			.add(Restrictions.like("u.username", username))
+			.add(Restrictions.like("s.stockSymbol", symbol))
+			.list();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public Purchase findPurchaseById(int id) {
+		try {
+			return (Purchase) sessionFactory.getCurrentSession().createCriteria(Purchase.class)
+			.createAlias("user", "u").createAlias("stock", "s")
+			.add(Restrictions.idEq(id))
+			.list().get(0);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public boolean updatePurchase(Purchase purchase) {
+		try {
+			sessionFactory.getCurrentSession().update(purchase);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
 	}
 	
-	public List<Purchase> findAll(){
-		return sessionFactory.getCurrentSession().createCriteria(Purchase.class).list();
+	public boolean deletePurchase(Purchase purchase) {
+		Purchase activePurchase = findPurchaseById(purchase.getPurchaseid());
+		try {
+			if (activePurchase != null) {
+				sessionFactory.getCurrentSession().delete(activePurchase);
+				return true;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return false;
+	}
+	
+	public List<Purchase> findAll() {
+		try {
+			return sessionFactory.getCurrentSession().createCriteria(Purchase.class).list();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

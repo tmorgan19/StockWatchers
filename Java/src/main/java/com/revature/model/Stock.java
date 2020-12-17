@@ -31,9 +31,9 @@ public class Stock {
 	//the ignore property may not be nessecary but I had problems with
 	//this in the previous project and this fixed it so I am putting them here
 	//just in case
-	@JsonIgnore
-	@OneToMany(mappedBy="stock")
-	private List<Purchase> purchases;
+//	@JsonIgnore
+//	@OneToMany(mappedBy="stock")
+//	private List<Purchase> purchases;
 
 	public Stock() {}
 	public Stock(int stockid, String stockSymbol) {
@@ -60,9 +60,9 @@ public class Stock {
 		this.stockSymbol = stockSymbol;
 	}
 	
-	public List<Purchase> getPurchases() {
-		return purchases;
-	}
+//	public List<Purchase> getPurchases() {
+//		return purchases;
+//	}
 	
 	@Override
 	public String toString() {
