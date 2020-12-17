@@ -40,7 +40,7 @@ export class ViewStockComponent implements OnInit {
         let q: Purchase[]
         let t: number = 0;
         let avg: number = 0;
-
+        this.purchasedAmount = 0;
         this.stockService.getUserStocks(u).subscribe(
           data => {
             q = data,
