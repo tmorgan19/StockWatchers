@@ -10,4 +10,4 @@ RUN npm install
 
 #Step Two
 FROM nginx:1.17.1-alpine
-COPY --from=builder dist/angular-hero user/share/nginx/html
+COPY dist/FinanceSite usr/share/nginx/html
