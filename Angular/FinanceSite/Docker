@@ -1,0 +1,13 @@
+#Step One
+FROM node:10-alpine as builder
+
+RUN mkdir -p /app
+WORKDIR /app
+
+#Install Dependencies
+COPY package.json /app
+RUN npm install
+
+#Step Two
+FROM nginx:1.17.1-alpine
+COPY --from=builder dist/angular-hero user/share/nginx/html

@@ -23,7 +23,7 @@ export class ViewStockComponent implements OnInit {
   stock: StockSearch
   purchasedAmount = 0;
   value: string = '0';
-  message: ClientMessage
+  message: ClientMessage = new ClientMessage("");
   averageCost: string = "0"
   ngOnInit(): void {
     this.getStock()
@@ -69,6 +69,7 @@ export class ViewStockComponent implements OnInit {
 
   submitPurchase(value: number) {
     console.log(this.stock)
+    this.message.message = "";
     let temp = this.stock;
     let u: User = new User(1, sessionStorage.getItem("activeUsername"), "123", "j", "enla", "enla@gmaiil.com")
     u.id = 1;
@@ -78,7 +79,7 @@ export class ViewStockComponent implements OnInit {
         data => {
           this.message = data;
           console.log(this.message)
-
+          this.getStock();
         }
       );
     }
@@ -86,6 +87,8 @@ export class ViewStockComponent implements OnInit {
   submitSell(value:number)
   {
     console.log(this.stock)
+    this.message.message = "";
+
     let temp = this.stock;
     let u: User = new User(1, sessionStorage.getItem("activeUsername"), "123", "j", "enla", "enla@gmaiil.com")
     u.id = 1;
@@ -95,6 +98,7 @@ export class ViewStockComponent implements OnInit {
         data => {
           this.message = data;
           console.log(this.message)
+          this.getStock();
 
         }
       );
