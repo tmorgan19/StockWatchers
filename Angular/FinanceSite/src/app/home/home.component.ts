@@ -13,27 +13,30 @@ export class HomeComponent implements OnInit {
 
   constructor(private stocksService:StocksService) { }
 
-  purchases: Purchase[];
-  condition: boolean;
+  purchases: Purchase[] = [];
+  condition: boolean = false;
 
   public activeUsername: string = sessionStorage.getItem('activeUsername')
   public user: User = new User(0,this.activeUsername,'','','','')
 
   ngOnInit(): void {
     this.getUserStocks();
-    this.checkCondition(this.purchases);
   }
 
   getUserStocks(): void {
     this.stocksService.getUserStocks(this.user)
-    .subscribe(purchases => this.purchases = purchases);
+    .subscribe(purchases => {
+      this.purchases = purchases;
+      this.condition=this.checkCondition(purchases);
+    });
   }
 
-  checkCondition(purchases){
-    if(purchases==[]){
-      this.condition == true;
+  checkCondition(purchases): boolean {
+    console.log(purchases);
+    if(purchases === undefined || purchases.length == 0){
+      return true;
     }else{
-      this.condition == false;
+      return false;
     }
   }
 
