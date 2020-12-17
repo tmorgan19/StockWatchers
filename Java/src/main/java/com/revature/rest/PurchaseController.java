@@ -21,7 +21,7 @@ import com.revature.service.PurchaseService;
 import com.revature.service.UserService;
 
 @Controller("purchaseController")
-@CrossOrigin(origins = "http://100.24.59.129")
+@CrossOrigin(origins = "*")
 public class PurchaseController {
 	
 	@Autowired

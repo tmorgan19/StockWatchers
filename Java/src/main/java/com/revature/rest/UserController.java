@@ -17,7 +17,7 @@ import com.revature.model.User;
 import com.revature.service.UserService;
 
 @Controller("userController")
-@CrossOrigin(origins = "http://100.24.59.129")
+@CrossOrigin(origins = "*")
 public class UserController {
 
 	@Autowired
