@@ -57,7 +57,6 @@ public class UserService {
 	}
 
 	public boolean updateInfo(User user) {
-		//boolean success = false; //DBG *Patrick* - I commented this out because it doesn't seem to do anything
 		User userinDB = getUserByUsername(user.getUsername());
 		
 		if (userinDB != null) {
