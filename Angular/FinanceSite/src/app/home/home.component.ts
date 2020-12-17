@@ -48,8 +48,7 @@ export class HomeComponent implements OnInit {
 
     for(let x=0;x<purchases.length;x++){
       if(x==0){
-        let num = purchases[0].price*purchases[0].amount
-        purchases[0].price = parseInt((Math.round(num*100)/100).toFixed(2))
+        purchases[0].price = purchases[0].price*purchases[0].amount
         setPurchases.push(purchases[0]);
         continue;
       }
