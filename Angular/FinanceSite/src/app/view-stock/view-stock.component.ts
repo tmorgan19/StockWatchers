@@ -57,7 +57,14 @@ export class ViewStockComponent implements OnInit {
             console.log(avg)
             console.log(t)
             //Average cost of each stock
-            this.averageCost = (avg / t).toFixed(2)
+            if(t >0)
+            {
+              this.averageCost = (avg / t).toFixed(2)
+
+            }
+            else{
+              this.averageCost= "0"
+            }
           }
         )
 
