@@ -11,7 +11,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class UserService {
 
-  header= new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*'})
+  header= new HttpHeaders({'Content-Type': 'application/json'})
 
   public currUser: Observable<User>
 

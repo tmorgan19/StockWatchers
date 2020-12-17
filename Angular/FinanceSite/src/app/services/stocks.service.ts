@@ -18,8 +18,7 @@ import { query } from '@angular/animations';
 })
 export class StocksService {
 
- header= new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*'})
-
+  header= new HttpHeaders({'Content-Type': 'application/json'})
   constructor(private http: HttpClient, private messageService:MessageService) { }
 
   stockList:StockAll[]
