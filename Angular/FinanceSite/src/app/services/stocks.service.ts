@@ -18,11 +18,12 @@ import { query } from '@angular/animations';
 })
 export class StocksService {
 
-  header= new HttpHeaders({'Content-Type': 'application/json'})
+ httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
   constructor(private http: HttpClient, private messageService:MessageService) { }
 
   stockList:StockAll[]
-
 
   //Returns a list of the top stocks with everything but their monetary value. A user will have to search a specific stock to see that (or click on that stock)
   //Should be used to generate search list, as it doesn't have a api cost
@@ -62,8 +63,7 @@ export class StocksService {
   
   public getUserStocks(user:User): Observable<Purchase[]>
   {
-
-    return this.http.post<Purchase[]>(`${SERVER_URL}/getPurchaseByUser`,user,{headers:this.header}).pipe(
+    return this.http.post<Purchase[]>(`${SERVER_URL}/getPurchaseByUser`,user).pipe(
       catchError(this.handleError<Purchase[]>('getUserStocks',[])
     ))
   }
@@ -82,7 +82,7 @@ export class StocksService {
     p.purchaseid =0;
     p.price = stock.latestPrice;
     p.dateString = "2020-10-02 02:02:02.000"
-    return this.http.post<ClientMessage>(`${SERVER_URL}/newPurchase`,p,{headers:this.header}).pipe(
+    return this.http.post<ClientMessage>(`${SERVER_URL}/newPurchase`,p).pipe(
       catchError(this.handleError<ClientMessage>("saveUserStocks",null))
     )
   }
@@ -99,7 +99,7 @@ export class StocksService {
     p.purchaseid =0;
     p.price = stock.latestPrice;
     p.dateString = "2020-10-02 02:02:02.000"
-    return this.http.post<ClientMessage>(`${SERVER_URL}/removeStockBySymbolByUser`,p,{headers:this.header}).pipe(
+    return this.http.post<ClientMessage>(`${SERVER_URL}/removeStockBySymbolByUser`,p).pipe(
       catchError(this.handleError<ClientMessage>("saveUserStocks",null))
     )
   }

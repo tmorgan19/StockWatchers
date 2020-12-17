@@ -21,7 +21,7 @@ import com.revature.service.PurchaseService;
 import com.revature.service.UserService;
 
 @Controller("purchaseController")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class PurchaseController {
 	
 	@Autowired

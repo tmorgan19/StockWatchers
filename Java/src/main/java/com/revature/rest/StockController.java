@@ -14,7 +14,7 @@ import com.revature.model.Stock;
 import com.revature.service.StockService;
 
 @Controller("stockController")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class StockController {
 
 	@Autowired
