@@ -1,7 +1,7 @@
 # StockWatchers
 
 ## Summary
-StockWatchers is an application that allows users to find and track stocks they would like to purchase/sell.
+StockWatchers is an application that allows users to find and track stocks they would like to purchase/sell. Users are able to login, search for stocks, view stock information and current price, purchase any number of stocks to be added to their account, sell any number of their owned stocks, and view all stocks they possess.
 
 Note: Users cannot perform any real transactions on the stock market, this project is for tracking info only.
 
