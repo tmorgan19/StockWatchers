@@ -31,3 +31,6 @@ Note: Users cannot perform any real transactions on the stock market, this proje
 - AWS RDS (PostgreSQL database)
 - Junit
 - Mockito
+
+## Contributors
+Thomas Morgan, Ben Johnston, Patrick Warring, Young Ha Shin
